@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch';
 import algoliasearchHelper from 'algoliasearch-helper';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
+import FacetCuisine from './components/FacetCuisine';
 import './App.css';
 import algoliaLogo from './algolia-logo.svg';
 
@@ -63,18 +64,14 @@ class App extends Component {
         </header>
         <div className="App_results">
           <div className="App_facets">
-            <div className="facet">
-              <h2 className="facet__title">Cuisine</h2>
-              {this.state.facetFoodType.slice(0, 15).map((foodType) => {
-                return (
-                  <div key={foodType.name}>
-                    {foodType.name} ({foodType.count})
-                  </div>
-                );
-              })}
-            </div>
+            <FacetCuisine
+              cuisines={this.state.facetFoodType}
+              onClick={(name) => {
+                helper.addFacetRefinement('food_type', name).search();
+              }}
+            />
 
-            <div className="facet">
+            {/* <div className="facet">
               <h2 className="facet__title">Rating</h2>
               {this.state.facetStarsCount.map((starCount) => {
                 return (
@@ -83,7 +80,7 @@ class App extends Component {
                   </div>
                 );
               })}
-            </div>
+            </div> */}
 
             <div className="App__credits">
               <a href="https://www.algolia.com/">

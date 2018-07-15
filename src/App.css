@@ -13,11 +13,7 @@
   box-sizing: border-box;
   flex: 0 0 192px;
   padding: 8px;
-}
-
-.facet__title {
-  margin: 0;
-  padding: 0;
+  overflow: hidden;
 }
 
 .App__credits {

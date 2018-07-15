@@ -7,7 +7,11 @@ const APPLICATION_ID = 'GSSRJE9CVZ';
 const API_KEY = '615e7854eb8c66e0ead01ae02add074f';
 const INDEX_NAME = 'dev_restaurant_search';
 var client = algoliasearch(APPLICATION_ID, API_KEY);
-var helper = algoliasearchHelper(client, INDEX_NAME);
+var helper = algoliasearchHelper(client, INDEX_NAME, {
+  facets: ['food_type', 'rounded_stars_count'],
+  aroundLatLngViaIP: true,
+  getRankingInfo: true,
+});
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +22,7 @@ class App extends Component {
     };
 
     helper.on('result', (content) => {
+      console.log(content);
       this.setState({
         results: content.hits,
       });
@@ -50,7 +55,12 @@ class App extends Component {
         </form>
         <div className="result">
           {this.state.results.map((result) => {
-            return <div key={result.objectID}>{result.name}</div>;
+            return (
+              <div key={result.objectID}>
+                {result.name}
+                ({result._rankingInfo.geoDistance / 1000}km)
+              </div>
+            );
           })}
         </div>
       </div>

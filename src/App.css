@@ -1,0 +1,35 @@
+.App__header {
+  padding: 32px 20%;
+  background: var(--brand-color);
+}
+
+.App_results {
+  box-sizing: border-box;
+  display: flex;
+  padding: 16px;
+}
+
+.App_facets {
+  box-sizing: border-box;
+  flex: 0 0 192px;
+  padding: 8px;
+}
+
+.facet__title {
+  margin: 0;
+  padding: 0;
+}
+
+.App__credits {
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.App__credits img {
+  vertical-align: top;
+}
+
+.App__credits a {
+  color: #666;
+  text-decoration: none;
+}

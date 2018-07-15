@@ -1,0 +1,36 @@
+.SearchBar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 6px;
+    transition: box-shadow 0.1s;
+}
+
+.SearchBar svg {
+    fill: #dddddd;
+    transition: fill 0.1s;
+}
+
+.SearchBar.--focused {
+    box-shadow: 0 0 0 3px #8C7642;
+}
+
+.SearchBar.--focused svg {
+    fill: #8C7642;
+}
+
+.SearchBar label {
+    width: 32px;
+    height: 32px;
+    padding-left: 6px;
+}
+
+.SearchBar input {
+    appearance: none;
+    flex: 1 1 auto;
+    font-size: 18px;
+    padding: 8px;
+    border: 0;
+    border-radius: 6px;
+    outline: 0;
+}

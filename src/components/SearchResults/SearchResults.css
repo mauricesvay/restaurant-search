@@ -1,0 +1,14 @@
+.SearchResults__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.SearchResults__result {
+    flex: 0 0 25%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

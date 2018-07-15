@@ -1,0 +1,45 @@
+.RestaurantCard {
+    margin: 8px;
+    background: white;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.RestaurantCard__image {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.RestaurantCard__info {
+    padding: 16px;
+}
+
+.RestaurantCard__name {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.RestaurantCard__name:hover {
+    color: var(--brand-color-darker);
+}
+
+.RestaurantCard__category {
+    color: #888;
+}
+
+.RestaurantCard__rating .Rating {
+    margin-right: 4px;
+    vertical-align: top;
+}

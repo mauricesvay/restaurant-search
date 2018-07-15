@@ -1,0 +1,31 @@
+.Rating {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 14px;
+}
+
+.Rating .bg,
+.Rating .fg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 14px;
+    line-height: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.Rating svg {
+    width: 14px;
+    height: 14px;
+}
+
+.Rating .bg svg {
+    fill: #cccccc;
+}
+
+.Rating .fg svg {
+    fill: var(--brand-color);
+}

@@ -13,7 +13,6 @@ class FacetCuisine extends Component {
 
   handleClick = (event) => {
     const target = event.currentTarget;
-    console.log(target, target.getAttribute('data-name'));
     if (this.props.onClick) {
       this.props.onClick(target.getAttribute('data-name'));
     }

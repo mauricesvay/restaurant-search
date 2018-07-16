@@ -75,3 +75,33 @@ body {
 .facet__more button:hover {
   color: var(--brand-color);
 }
+
+.button {
+  appearance: none;
+  padding: 8px 16px;
+  background: var(--brand-color);
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: 0;
+}
+
+.button.--large {
+  padding: 16px 32px;
+}
+
+.button:focus,
+.button:hover {
+  background: var(--brand-color-darker);
+  color: #ffffff;
+}
+
+.button:disabled {
+  background: var(--brand-color);
+  color: #ffffff;
+  opacity: 0.5;
+}

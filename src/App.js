@@ -14,6 +14,7 @@ var client = algoliasearch(APPLICATION_ID, API_KEY);
 var helper = algoliasearchHelper(client, INDEX_NAME, {
   facets: ['food_type', 'rounded_stars_count'],
   aroundLatLngViaIP: true,
+  hitsPerPage: 4 * 3 * 2,
 });
 
 class App extends Component {
@@ -26,17 +27,24 @@ class App extends Component {
       facetStarsCount: [],
       page: 0,
       nbPages: 0,
+      hasMorePages: false,
     };
 
     helper.on('result', (content) => {
-      // console.log(content);
-      // console.log(content.nbHits, content.nbPages);
+      console.log(content);
+      const hasMorePages = content.page < content.nbPages - 1;
+      const currentPage = helper.getPage();
+      const results =
+        currentPage === 0
+          ? content.hits
+          : this.state.results.concat(content.hits);
       this.setState({
-        results: content.hits,
+        results: results,
         facetFoodType: content.getFacetValues('food_type'),
         facetStarsCount: content.getFacetValues('rounded_stars_count'),
         page: content.page,
         nbPages: content.nbPages,
+        hasMorePages: hasMorePages,
       });
     });
   }
@@ -54,6 +62,11 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  handleLoadMoreClicked = (event) => {
+    helper.setPage(helper.getPage() + 1).search();
+  };
+
   render() {
     return (
       <div className="App">
@@ -67,7 +80,7 @@ class App extends Component {
             <FacetCuisine
               cuisines={this.state.facetFoodType}
               onClick={(name) => {
-                helper.addFacetRefinement('food_type', name).search();
+                helper.toggleFacetRefinement('food_type', name).search();
               }}
             />
 
@@ -89,7 +102,12 @@ class App extends Component {
               </a>
             </div>
           </div>
-          <SearchResults results={this.state.results} />
+          <SearchResults
+            results={this.state.results}
+            hasMorePages={this.state.hasMorePages}
+            currentPage={this.state.page}
+            onLoadMoreClicked={this.handleLoadMoreClicked}
+          />
         </div>
       </div>
     );

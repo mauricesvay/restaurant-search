@@ -53,19 +53,29 @@ class FacetCuisine extends Component {
         <span className="facet__name" title={cuisine.name}>
           {cuisine.name}
         </span>
-        <span className="facet__count">{cuisine.count}</span>
+        <span className="facet__count">
+          {this.props.isRefined ? '✕' : cuisine.count}
+        </span>
       </li>
     );
   };
 
-  render() {
+  renderCuisines() {
     const mainCuisines = this.props.cuisines.slice(0, MAX_VISIBLE_CUISINES);
     const secondaryCuisines = this.props.cuisines.slice(MAX_VISIBLE_CUISINES);
     return (
-      <div className="FacetCuisine facet">
-        <h2 className="facet__title">Cuisine</h2>
+      <div>
         <ul>{mainCuisines.map(this.renderCuisine)}</ul>
         {this.renderSecondaryCuisines(secondaryCuisines)}
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="FacetCuisine facet">
+        <h2 className="facet__title">Cuisine</h2>
+        {this.renderCuisines()}
       </div>
     );
   }

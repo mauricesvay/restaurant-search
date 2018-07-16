@@ -12,7 +12,7 @@ const API_KEY = '615e7854eb8c66e0ead01ae02add074f';
 const INDEX_NAME = 'dev_restaurant_search';
 var client = algoliasearch(APPLICATION_ID, API_KEY);
 var helper = algoliasearchHelper(client, INDEX_NAME, {
-  facets: ['food_type', 'rounded_stars_count'],
+  facets: ['food_type'],
   aroundLatLngViaIP: true,
   hitsPerPage: 4 * 3 * 2,
 });
@@ -23,8 +23,10 @@ class App extends Component {
     this.state = {
       q: '',
       results: [],
+
       facetFoodType: [],
-      facetStarsCount: [],
+      isRefined: false,
+
       page: 0,
       nbPages: 0,
       hasMorePages: false,
@@ -38,10 +40,12 @@ class App extends Component {
         currentPage === 0
           ? content.hits
           : this.state.results.concat(content.hits);
+      const isRefined = helper.hasRefinements('food_type');
+
       this.setState({
         results: results,
         facetFoodType: content.getFacetValues('food_type'),
-        facetStarsCount: content.getFacetValues('rounded_stars_count'),
+        isRefined: isRefined,
         page: content.page,
         nbPages: content.nbPages,
         hasMorePages: hasMorePages,
@@ -79,22 +83,11 @@ class App extends Component {
           <div className="App_facets">
             <FacetCuisine
               cuisines={this.state.facetFoodType}
+              isRefined={this.state.isRefined}
               onClick={(name) => {
                 helper.toggleFacetRefinement('food_type', name).search();
               }}
             />
-
-            {/* <div className="facet">
-              <h2 className="facet__title">Rating</h2>
-              {this.state.facetStarsCount.map((starCount) => {
-                return (
-                  <div key={starCount.name}>
-                    {starCount.name} ({starCount.count})
-                  </div>
-                );
-              })}
-            </div> */}
-
             <div className="App__credits">
               <a href="https://www.algolia.com/">
                 <img src={algoliaLogo} alt="Algolia" width="14" height="14" />{' '}

@@ -33,7 +33,6 @@ class App extends Component {
     };
 
     helper.on('result', (content) => {
-      console.log(content);
       const hasMorePages = content.page < content.nbPages - 1;
       const currentPage = helper.getPage();
       const results =

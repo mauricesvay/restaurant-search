@@ -1,5 +1,6 @@
 .SearchResults {
   flex: 1 1 auto;
+  overflow: hidden;
 }
 
 .SearchResults__list {
@@ -17,9 +18,27 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 1024px) {
+  .SearchResults__result {
+    flex: 0 0 33%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .SearchResults__result {
+    flex: 0 0 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .SearchResults__list {
+    display: block;
+  }
+}
+
 .SearchResults__pagination {
-    padding: 16px;
-    text-align: center;
+  padding: 16px;
+  text-align: center;
 }
 
 .SearchResults__empty {

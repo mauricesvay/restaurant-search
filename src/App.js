@@ -103,6 +103,7 @@ class App extends Component {
             </div>
           </div>
           <SearchResults
+            q={this.state.q}
             results={this.state.results}
             hasMorePages={this.state.hasMorePages}
             currentPage={this.state.page}

@@ -21,3 +21,10 @@
     padding: 16px;
     text-align: center;
 }
+
+.SearchResults__empty {
+  padding: 64px;
+  text-align: center;
+  color: #888;
+  line-height: 36px;
+}

@@ -43,19 +43,36 @@ class SearchResults extends Component {
     }
   }
 
+  renderResults() {
+    const results = this.props.results.map((restaurant) => {
+      return (
+        <li className="SearchResults__result" key={restaurant.objectID}>
+          <RestaurantCard restaurant={restaurant} />
+        </li>
+      );
+    });
+
+    return <ul className="SearchResults__list">{results}</ul>;
+  }
+
   render() {
-    const results = this.props.results;
+    let results;
+    if (this.props.results.length) {
+      results = this.renderResults();
+    } else {
+      if (this.props.q !== '') {
+        results = (
+          <div className="SearchResults__empty">
+            No results.<br/>
+            <em>Tip: You can search restaurants by name, or by cuisine.</em>
+          </div>
+        );
+      }
+    }
+
     return (
       <div className="SearchResults">
-        <ul className="SearchResults__list">
-          {results.map((restaurant) => {
-            return (
-              <li className="SearchResults__result" key={restaurant.objectID}>
-                <RestaurantCard restaurant={restaurant} />
-              </li>
-            );
-          })}
-        </ul>
+        {results}
         {this.renderPagination()}
       </div>
     );
